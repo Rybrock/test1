@@ -17,7 +17,9 @@ class DevelopersFactory extends Factory
     public function definition(): array
     {
         return [
-            'developer name' => fake()->employer(),
+            'developer name' => fake()->company(),
+            'developer email' => fake()->companyEmail(),
+            'developer address' => fake()->address(),
             'developer location' => fake()->country()
         ];
     }

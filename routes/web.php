@@ -14,8 +14,4 @@ use App\Models\Developers;
 |
 */
 
-Route::get('/', function () {
-    $developers = Developers::all();
-    dd($developers);
-});
 
