@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('developers', function (Blueprint $table) {
             $table->id();
-            $table->string('Developer Name');
-            $table->string('Developer Email');
-            $table->string('Developer Address');
-            $table->string('Developer Location');
+            $table->string('developer_name');
+            $table->string('email')->unique();
+            $table->string('developer_address');
+            $table->string('developer_location');
+            $table->integer('developer_experience');
+            $table->boolean('is_active');
+            $table->decimal('hourly_rate', 8, 2);
+            $table->date('joined_date');
+            $table->decimal('rating', 3, 1);
             $table->timestamps();
         });
     }

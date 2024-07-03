@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->string('Game Name');
-            $table->string('Game Developer');
-            $table->string('Game Release Date');
+            $table->string('game_name');
+            $table->string('email')->unique();
+            $table->string('game_address');
+            $table->string('game_location');
+            $table->integer('game_experience');
+            $table->boolean('is_active');
+            $table->date('joined_date');
+            $table->decimal('rating', 3, 1);
             $table->timestamps();
         });
     }

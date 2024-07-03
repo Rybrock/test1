@@ -17,10 +17,15 @@ class DevelopersFactory extends Factory
     public function definition(): array
     {
         return [
-            'developer name' => fake()->company(),
-            'developer email' => fake()->companyEmail(),
-            'developer address' => fake()->address(),
-            'developer location' => fake()->country()
+            'developer_name' => $this->faker->company(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'developer_address' => $this->faker->address(),
+            'developer_location' => $this->faker->country(),
+            'developer_experience' => $this->faker->numberBetween(1, 30),
+            'is_active' => $this->faker->boolean(),
+            'hourly_rate' => $this->faker->randomFloat(2, 20, 100),
+            'joined_date' => $this->faker->date(),
+            'rating' => $this->faker->randomFloat(1, 0, 5)
         ];
     }
 }
