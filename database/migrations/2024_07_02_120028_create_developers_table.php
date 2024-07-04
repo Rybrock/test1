@@ -17,10 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('developer_address');
             $table->string('developer_location');
-            $table->integer('developer_experience');
+            $table->integer('developer_meta_score');
             $table->boolean('is_active');
-            $table->decimal('hourly_rate', 8, 2);
-            $table->date('joined_date');
+            $table->date('first_published_game');
             $table->decimal('rating', 3, 1);
             $table->timestamps();
         });

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Games>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Developers>
  */
-class GamesFactory extends Factory
+class DeveloperFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,13 +17,13 @@ class GamesFactory extends Factory
     public function definition(): array
     {
         return [
-            'game_name' => $this->faker->company(),
+            'developer_name' => $this->faker->company(),
             'email' => $this->faker->unique()->safeEmail(),
-            'game_address' => $this->faker->address(),
-            'game_location' => $this->faker->country(),
-            'game_experience' => $this->faker->numberBetween(1, 30),
+            'developer_address' => $this->faker->address(),
+            'developer_location' => $this->faker->country(),
+            'developer_meta_score' => $this->faker->numberBetween(1, 30),
             'is_active' => $this->faker->boolean(),
-            'joined_date' => $this->faker->date(),
+            'first_published_game' => $this->faker->date(),
             'rating' => $this->faker->randomFloat(1, 0, 5)
         ];
     }

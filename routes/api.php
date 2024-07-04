@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\GameController;
+use App\Models\Developer;
+use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Developers;
-use App\Models\Games;
+
+
 
 
 /*
@@ -20,11 +24,15 @@ use App\Models\Games;
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request)  {
     return $request->user();
 });
-Route::get('/developers', function () {
-    $developers = Developers::all();
-    return $developers;
-});
-Route::get('/games', function () {
-    $games = Games::all();
-    return $games;
-});
+// developer routes
+Route::get('developers', [DeveloperController::class, 'index']);
+Route::post('developers', [DeveloperController::class, 'store']);
+Route::get('developers/{id}', [DeveloperController::class, 'show']);
+Route::put('developers/{id}', [DeveloperController::class, 'update']);
+Route::delete('developers/{id}', [DeveloperController::class, 'destroy']);
+// game routes
+Route::get('games', [GameController::class, 'index']);
+Route::post('games', [GameController::class, 'store']);
+Route::get('games/{id}', [GameController::class, 'show']);
+Route::put('games/{id}', [GameController::class, 'update']);
+Route::delete('games/{id}', [GameController::class, 'destroy']);
