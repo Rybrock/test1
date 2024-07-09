@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreDeveloperRequest;
 use App\Models\Developer;
+use Illuminate\Http\Request;
 
 class DeveloperController extends Controller
 {
-    // list developers.
+    // List developers.
     public function index()
     {
         $developers = Developer::all();
@@ -15,9 +16,9 @@ class DeveloperController extends Controller
     }
 
     // Store
-    public function store(Request $request)
+    public function store(StoreDeveloperRequest $request)
     {
-        $developer = Developer::create($request->all());
+        $developer = Developer::create($request->validated());
         return response()->json($developer, 201);
     }
 
@@ -29,10 +30,10 @@ class DeveloperController extends Controller
     }
 
     // Update
-    public function update(Request $request, $id)
+    public function update(StoreDeveloperRequest $request, $id)
     {
         $developer = Developer::findOrFail($id);
-        $developer->update($request->all());
+        $developer->update($request->validated());
         return response()->json($developer);
     }
 
