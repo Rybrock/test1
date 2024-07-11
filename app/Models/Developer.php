@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Game;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,4 +20,9 @@ class Developer extends Model
         'rating',
         'first_published_game'
     ];
+
+    public function games()
+    {
+        return $this->hasMany(Game::class);
+    }
 }

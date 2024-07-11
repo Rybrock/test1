@@ -25,11 +25,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('developers', [DeveloperController::class, 'index']);
 Route::post('developers', [DeveloperController::class, 'store']);
 Route::get('developers/{id}', [DeveloperController::class, 'show']);
-Route::put('developers/{id}', [DeveloperController::class, 'update']);
+Route::post('developers/{id}', [DeveloperController::class, 'update']);
 Route::delete('developers/{id}', [DeveloperController::class, 'destroy']);
 // game routes
 Route::get('games', [GameController::class, 'index']);
 Route::post('games', [GameController::class, 'store']);
 Route::get('games/{id}', [GameController::class, 'show']);
-Route::put('games/{id}', [GameController::class, 'update']);
+Route::post('games/{id}', [GameController::class, 'update']);
 Route::delete('games/{id}', [GameController::class, 'destroy']);

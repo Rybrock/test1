@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreGameRequest;
 use App\Models\Game;
+use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
@@ -15,9 +16,9 @@ class GameController extends Controller
     }
 
     // Store
-    public function store(Request $request)
+    public function store(StoreGameRequest $request)
     {
-        $game = Game::create($request->all());
+        $game = Game::create($request->validated());
         return response()->json($game, 201);
     }
 
@@ -29,10 +30,13 @@ class GameController extends Controller
     }
 
     // Update
-    public function update(Request $request, $id)
+    public function update(StoreGameRequest $request, $id)
     {
         $game = Game::findOrFail($id);
-        $game->update($request->all());
+        $request->validate([
+            'developer_id' => 'required|exists:developers,id'
+        ]);
+        $game->update($request->validated());
         return response()->json($game);
     }
 

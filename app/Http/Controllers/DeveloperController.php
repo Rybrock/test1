@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDeveloperRequest;
 use App\Models\Developer;
-use Illuminate\Http\Request;
+use AWS\CRT\Log;
 
 class DeveloperController extends Controller
 {

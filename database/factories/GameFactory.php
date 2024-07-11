@@ -19,7 +19,7 @@ class GameFactory extends Factory
     {
         return [
             'game_name' => $this->faker->company(),
-            'developer_id' => Developer::factory(),
+            'developer_id' => Developer::all()->random()->id,
             'email' => $this->faker->unique()->safeEmail(),
             'game_address' => $this->faker->address(),
             'game_location' => $this->faker->country(),
