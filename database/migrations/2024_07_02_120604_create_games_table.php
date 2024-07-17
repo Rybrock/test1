@@ -14,15 +14,17 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             // $table->unsignedBigInteger('developer_id');
-            $table->foreignIdFor(App\Models\Developer::class);
+            $table->foreignIdFor(App\Models\Developer::class)->constrained()->onDelete('cascade');
             $table->string('game_name');
-            $table->string('email')->unique();
-            $table->string('game_address');
-            $table->string('game_location');
-            $table->integer('game_meta_score');
-            $table->boolean('is_active');
-            $table->date('first_published');
-            $table->decimal('rating', 3, 1);
+            $table->string('genre');
+            $table->string('platforms');
+            $table->string('game_origin');
+            $table->integer('meta_critic_score');
+            $table->boolean('out_now');
+            $table->date('release_date');
+            $table->boolean('collectors_edition');
+            $table->string('online_stores');
+            $table->string('audience');
             $table->timestamps();
         });
     }

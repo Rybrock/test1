@@ -7,9 +7,6 @@ use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,11 +22,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('developers', [DeveloperController::class, 'index']);
 Route::post('developers', [DeveloperController::class, 'store']);
 Route::get('developers/{id}', [DeveloperController::class, 'show']);
+Route::get('developers/{developer_id}/games/{game_id}', [DeveloperController::class, 'showGame']);
 Route::post('developers/{id}', [DeveloperController::class, 'update']);
 Route::delete('developers/{id}', [DeveloperController::class, 'destroy']);
+Route::delete('developers/{developer_id}/games/{game_id}', [DeveloperController::class, 'destroy']);
 // game routes
 Route::get('games', [GameController::class, 'index']);
 Route::post('games', [GameController::class, 'store']);
 Route::get('games/{id}', [GameController::class, 'show']);
 Route::post('games/{id}', [GameController::class, 'update']);
 Route::delete('games/{id}', [GameController::class, 'destroy']);
+
+

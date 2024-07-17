@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreDeveloperRequest extends FormRequest
 {
@@ -26,10 +28,18 @@ class StoreDeveloperRequest extends FormRequest
         'email' => 'required|string|max:255',
         'developer_address' => 'required|string|max:255',
         'developer_location' => 'required|string|max:255',
-        'developer_meta_score' => 'required|integer|min:1|max:30',
+        'lead_developer' => 'required|string|max:255',
+        'genre' => 'required|string|max:255',
         'is_active' => 'required|boolean',
         'first_published_game' => 'required|date',
-        'rating' => 'required|numeric|min:0|max:5',
+        'last_published_game' => 'required|date',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'errors' => $validator->errors()
+        ], 422));
     }
 }

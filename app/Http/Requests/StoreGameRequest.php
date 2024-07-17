@@ -23,13 +23,15 @@ class StoreGameRequest extends FormRequest
     {
         return [
         'game_name' => 'required|string|max:255',
-        'email' => 'required|string|max:255',
-        'game_address' => 'required|string|max:255',
-        'game_location' => 'required|string|max:255',
-        'game_meta_score' => 'required|integer|min:1|max:30',
-        'is_active' => 'required|boolean',
-        'first_published' => 'required|date',
-        'rating' => 'required|numeric|min:0|max:5',
+        'genre' => 'required|string|max:255',
+        'platforms' => 'required|string|max:255',
+        'game_origin' => 'required|string|max:255',
+        'meta_critic_score' => 'required|integer|min:1|max:30',
+        'out_now' => 'required|boolean',
+        'release_date' => 'required|date',
+        'collectors_edition' => 'required|boolean',
+        'online_stores' => 'required|string|max:255',
+        'audience' => 'required|string|max:255',
         'developer_id' => 'required|exists:developers,id'
         ];
     }

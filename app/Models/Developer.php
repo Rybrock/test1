@@ -15,10 +15,11 @@ class Developer extends Model
         'email',
         'developer_address',
         'developer_location',
-        'developer_meta_score',
+        'lead_developer',
+        'genre',
         'is_active',
-        'rating',
-        'first_published_game'
+        'first_published_game',
+        'last_published_game',
     ];
 
     public function games()

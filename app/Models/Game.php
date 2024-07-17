@@ -13,13 +13,15 @@ class Game extends Model
 
     protected $fillable = [
         'game_name',
-        'email',
-        'game_address',
-        'game_location',
-        'game_meta_score',
-        'is_active',
-        'rating',
-        'first_published',
+        'genre',
+        'platforms',
+        'game_origin',
+        'meta_critic_score',
+        'out_now',
+        'audience',
+        'online_stores',
+        'collectors_edition',
+        'release_date',
         'developer_id'
     ];
 

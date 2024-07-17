@@ -24,7 +24,6 @@ class DeveloperFactory extends Factory
             'developer_meta_score' => $this->faker->numberBetween(1, 30),
             'is_active' => $this->faker->boolean(),
             'first_published_game' => $this->faker->date(),
-            'rating' => $this->faker->randomFloat(1, 0, 5)
         ];
     }
 }
