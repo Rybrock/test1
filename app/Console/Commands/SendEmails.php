@@ -2,12 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\SubscriberEmail;
-use App\Models\Subscriber;
+use App\Jobs\SendSubscriberEmails;
 use App\Models\Game;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Subscriber;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
 
 class SendEmails extends Command
 {
@@ -27,7 +26,7 @@ class SendEmails extends Command
      */
     public function handle()
     {
-        // Get the subscriber and game IDs from the command - needs R&D
+        // Get the subscriber and game IDs from the command
         $subscriberId = $this->argument('subscriber');
         $gameId = $this->argument('game_id');
 
@@ -53,10 +52,10 @@ class SendEmails extends Command
         $threeMonthsFromToday = $today->copy()->addMonths(3);
 
         if ($releaseDate->between($today, $threeMonthsFromToday)) {
-            // Send the email if so
-            Mail::to($subscriber->email)->send(new SubscriberEmail($subscriber->name));
-            $this->info("Email sent to subscriber with ID {$subscriberId}");
-            // game more than 3 months from release, no email sent
+            // Dispatch the job with a delay of 1 minute
+            SendSubscriberEmails::dispatch($subscriber, $game)->delay(now()->addMinute());
+
+            $this->info("Email job dispatched with a 1-minute delay to subscriber with ID {$subscriberId}");
         } else {
             $this->info("No email sent. Game release date is not within the next 3 months.");
         }
