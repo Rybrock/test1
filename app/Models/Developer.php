@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Game;
+use App\Models\Subscriber;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +26,9 @@ class Developer extends Model
     public function games()
     {
         return $this->hasMany(Game::class);
+    }
+    public function subscribers()
+    {
+        return $this->hasMany(Subscriber::class);
     }
 }

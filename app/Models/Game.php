@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Developer;
+use App\Models\Subscriber;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,12 +23,18 @@ class Game extends Model
         'online_stores',
         'collectors_edition',
         'release_date',
-        'developer_id'
+        'developer_id',
+        'subscriber_id'
     ];
 
     public function developer()
     {
         return $this->belongsTo(Developer::class);
+    }
+
+    public function subscriber()
+    {
+        return $this->belongsTo(Subscriber::class);
     }
 
 }
