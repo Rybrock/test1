@@ -5,7 +5,7 @@
 </head>
 <body>
 
-    <h1>Hello, {{ $name }}!</h1>
+    <h1>Hello!</h1>
     <p>Thank you for signing up. We are excited to have you on board.</p>
     <p>To get started, please confirm your email address by clicking the link below:</p>
 

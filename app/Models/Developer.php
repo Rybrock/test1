@@ -23,6 +23,12 @@ class Developer extends Model
         'last_published_game',
     ];
 
+    protected $casts = [
+        'first_published_game' => 'date',
+        'last_published_game' => 'date',
+        'is_active' => 'boolean',
+    ];
+
     public function games()
     {
         return $this->hasMany(Game::class);

@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.8",
         "predis/predis": "^2.0",
         "symfony/http-client": "^6.4",
-        "symfony/mailgun-mailer": "^6.4"
+        "symfony/mailgun-mailer": "^6.4",
+        "laravel/nova": "^4.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -71,5 +72,11 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "nova": {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    }
 }
