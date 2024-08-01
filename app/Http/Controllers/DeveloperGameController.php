@@ -16,11 +16,19 @@ class DeveloperGameController extends Controller
 
     public function store(Request $request, $developer_id)
     {
+
         $developer = Developer::findOrFail($developer_id);
 
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'game_name' => 'required|string|max:255',
+            'genre' => 'required|string|max:255',
+            'game_origin' => 'required|string|max:255',
+            'platforms' => 'required|string|max:255',
+            'meta_critic_score' => 'required|integer',
+            'out_now' => 'required|boolean',
+            'collectors_edition' => 'required|boolean',
+            'online_stores' => 'required|string|max:255',
+            'audience' => 'required|string|max:255',
             'release_date' => 'required|date',
         ]);
 

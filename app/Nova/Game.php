@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Boolean;
@@ -91,11 +92,6 @@ class Game extends Resource
             BelongsTo::make('Developer', 'developer', \App\Nova\Developer::class)
                 ->sortable()
                 ->rules('required'),
-
-            BelongsTo::make('Subscriber', 'subscriber', \App\Nova\Subscriber::class)
-                ->sortable()
-                ->nullable()
-                ->rules('nullable'), // Make it nullable if not always required
         ];
     }
 

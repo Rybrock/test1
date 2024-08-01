@@ -17,9 +17,4 @@ class Subscriber extends Model
         'address',
         'location',
     ];
-
-    public function games()
-    {
-        return $this->belongsToMany(Game::class, 'game_subscriber');
-    }
 }

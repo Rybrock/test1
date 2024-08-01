@@ -24,9 +24,7 @@ class Game extends Model
         'collectors_edition',
         'release_date',
         'developer_id',
-        'subscriber_id'
     ];
-
     protected $casts = [
         'release_date' => 'date',
         'out_now' => 'boolean',
@@ -35,11 +33,6 @@ class Game extends Model
     public function developer()
     {
         return $this->belongsTo(Developer::class);
-    }
-
-    public function subscriber()
-    {
-        return $this->belongsTo(Subscriber::class);
     }
 
 }

@@ -61,9 +61,6 @@ class Subscriber extends Resource
             Text::make('Location', 'location')
                 ->sortable()
                 ->rules('required', 'max:255'),
-
-            BelongsToMany::make('Games', 'games', \App\Nova\Game::class)
-                ->sortable(),
         ];
     }
 

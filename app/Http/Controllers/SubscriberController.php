@@ -21,21 +21,21 @@ class SubscriberController extends Controller
     public function store(StoreSubscriberRequest $request)
     {
         $validatedData = $request->validated();
-    
+
         $subscriber = Subscriber::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'address' => $validatedData['address'],
             'location' => $validatedData['location'],
         ]);
-    
+
         if (!empty($validatedData['games'])) {
             $subscriber->games()->attach($validatedData['games']);
         }
-    
+
         return response()->json($subscriber, 201);
     }
-    
+
 
     public function update(Request $request, $id)
     {
