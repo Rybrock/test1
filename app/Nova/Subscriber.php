@@ -5,26 +5,25 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Email;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Developer extends Resource
+class Subscriber extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Developer>
+     * @var class-string<\App\Models\Subscriber>
      */
-    public static $model = \App\Models\Developer::class;
+    public static $model = \App\Models\Subscriber::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'developer_name';
+    public static $title = 'name'; // Display the name of the subscriber as the title
+
     /**
      * The columns that should be searched.
      *
@@ -32,12 +31,12 @@ class Developer extends Resource
      */
     public static $search = [
         'id',
-        'developer_name',
+        'name',
         'email',
     ];
 
     /**
-     * Get the fields displayed in the resource.
+     * Get the fields displayed by the resource.
      *
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
@@ -47,41 +46,24 @@ class Developer extends Resource
         return [
             ID::make()->sortable(),
 
-            Text::make('Developer Name', 'developer_name')
+            Text::make('Name', 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Email::make('Email')
+            Text::make('Email', 'email')
                 ->sortable()
-                ->rules('required', 'email', 'max:254'),
+                ->rules('required', 'email', 'max:255'),
 
-            Text::make('Developer Address', 'developer_address')
-                ->sortable()
-                ->rules('nullable', 'max:255'),
-
-            Text::make('Developer Location', 'developer_location')
-                ->sortable()
-                ->rules('nullable', 'max:255'),
-
-            Text::make('Lead Developer', 'lead_developer')
-                ->sortable()
-                ->rules('nullable', 'max:255'),
-
-            Text::make('Genre')
+            Text::make('Address', 'address')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Boolean::make('Is Active', 'is_active')
+            Text::make('Location', 'location')
                 ->sortable()
-                ->rules('required'),
+                ->rules('required', 'max:255'),
 
-            Date::make('First Published Game', 'first_published_game')
-                ->sortable()
-                ->rules('nullable', 'date'),
-
-            Date::make('Last Published Game', 'last_published_game')
-                ->sortable()
-                ->rules('nullable', 'date'),
+            BelongsToMany::make('Games', 'games', \App\Nova\Game::class)
+                ->sortable(),
         ];
     }
 

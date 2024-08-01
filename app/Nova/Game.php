@@ -4,6 +4,10 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Game extends Resource
@@ -20,7 +24,7 @@ class Game extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'game_name';
 
     /**
      * The columns that should be searched.
@@ -29,10 +33,11 @@ class Game extends Resource
      */
     public static $search = [
         'id',
+        'game_name',
     ];
 
     /**
-     * Get the fields displayed by the resource.
+     * Get the fields displayed in the resource.
      *
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
@@ -41,6 +46,56 @@ class Game extends Resource
     {
         return [
             ID::make()->sortable(),
+
+            Text::make('Game Name', 'game_name')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make('Genre', 'genre')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make('Platforms', 'platforms')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make('Game Origin', 'game_origin')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make('Meta Critic Score', 'meta_critic_score')
+                ->sortable()
+                ->rules('required', 'numeric', 'min:0', 'max:100'),
+
+            Boolean::make('Out Now', 'out_now')
+                ->sortable()
+                ->rules('required'),
+
+            Text::make('Audience', 'audience')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make('Online Stores', 'online_stores')
+                ->sortable()
+                ->rules('nullable', 'max:255'),
+
+            Boolean::make('Collector\'s Edition', 'collectors_edition')
+                ->sortable()
+                ->rules('required'),
+
+            Date::make('Release Date', 'release_date')
+                ->sortable()
+                ->rules('required', 'date'),
+
+            // Relationships
+            BelongsTo::make('Developer', 'developer', \App\Nova\Developer::class)
+                ->sortable()
+                ->rules('required'),
+
+            BelongsTo::make('Subscriber', 'subscriber', \App\Nova\Subscriber::class)
+                ->sortable()
+                ->nullable()
+                ->rules('nullable'), // Make it nullable if not always required
         ];
     }
 

@@ -27,6 +27,11 @@ class Game extends Model
         'subscriber_id'
     ];
 
+    protected $casts = [
+        'release_date' => 'date',
+        'out_now' => 'boolean',
+    ];
+
     public function developer()
     {
         return $this->belongsTo(Developer::class);
