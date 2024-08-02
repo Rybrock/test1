@@ -16,5 +16,11 @@ class Subscriber extends Model
         'email',
         'address',
         'location',
+        'game_id'
     ];
+
+    public function games()
+    {
+        return $this->belongsToMany(Game::class, 'game_subscriber');
+    }
 }

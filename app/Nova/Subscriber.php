@@ -2,10 +2,9 @@
 
 namespace App\Nova;
 
-use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Subscriber extends Resource
@@ -22,7 +21,7 @@ class Subscriber extends Resource
      *
      * @var string
      */
-    public static $title = 'name'; // Display the name of the subscriber as the title
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -61,6 +60,9 @@ class Subscriber extends Resource
             Text::make('Location', 'location')
                 ->sortable()
                 ->rules('required', 'max:255'),
+
+            // Relationship field
+            BelongsToMany::make('Games', 'games', \App\Nova\Game::class),
         ];
     }
 

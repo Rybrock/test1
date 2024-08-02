@@ -33,9 +33,8 @@ class SubscriberController extends Controller
             $subscriber->games()->attach($validatedData['games']);
         }
 
-        return response()->json($subscriber, 201);
+        return response()->json($subscriber->load('games'), 201);
     }
-
 
     public function update(Request $request, $id)
     {
@@ -44,8 +43,10 @@ class SubscriberController extends Controller
         $validatedData = $request->validate([
             'name' => 'string|max:255',
             'email' => 'email|unique:subscribers,email,' . $subscriber->id,
+            'address' => 'string|max:255',
+            'location' => 'string|max:255',
             'games' => 'array',
-            'games.*' => 'exists:games,id'
+            'games.*' => 'exists:games,id',
         ]);
 
         $subscriber->update($validatedData);
@@ -54,7 +55,7 @@ class SubscriberController extends Controller
             $subscriber->games()->sync($validatedData['games']);
         }
 
-        return response()->json($subscriber, 200);
+        return response()->json($subscriber->load('games'), 200);
     }
 
     public function destroy($id)
@@ -86,5 +87,3 @@ class SubscriberController extends Controller
         return response()->json(null, 204);
     }
 }
-
-

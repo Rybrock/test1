@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('games', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            // $table->unsignedBigInteger('developer_id');
-            $table->foreignIdFor(App\Models\Developer::class)->constrained()->onDelete('cascade');
+            $table->id();
+            $table->foreignIdFor(App\Models\Developer::class)
+                  ->constrained()
+                  ->onDelete('cascade');
             $table->string('game_name');
             $table->string('genre');
             $table->string('platforms');
@@ -37,3 +38,4 @@ return new class extends Migration
         Schema::dropIfExists('games');
     }
 };
+

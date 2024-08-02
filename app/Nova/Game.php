@@ -3,12 +3,12 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Game extends Resource
@@ -88,10 +88,12 @@ class Game extends Resource
                 ->sortable()
                 ->rules('required', 'date'),
 
-            // Relationships
+            // Relationship Fields
             BelongsTo::make('Developer', 'developer', \App\Nova\Developer::class)
                 ->sortable()
-                ->rules('required'),
+                ->rules('required', 'exists:developers,id'),
+
+            BelongsToMany::make('Subscribers', 'subscribers', \App\Nova\Subscriber::class),
         ];
     }
 
