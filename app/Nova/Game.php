@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -56,9 +57,13 @@ class Game extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('Platforms', 'platforms')
-                ->sortable()
-                ->rules('required', 'max:255'),
+            Select::make('Platforms')
+                ->options([
+                    'PS5' => 'PS5',
+                    'XBOX' => 'XBOX',
+                    'PC' => 'PC',
+                ])
+                ->rules('required'),
 
             Text::make('Game Origin', 'game_origin')
                 ->sortable()
@@ -89,7 +94,7 @@ class Game extends Resource
                 ->rules('required', 'date'),
 
             // Relationship Fields
-            BelongsTo::make('Developer', 'developer', \App\Nova\Developer::class)
+            BelongsToMany::make('Developer', 'developer', \App\Nova\Developer::class)
                 ->sortable()
                 ->rules('required', 'exists:developers,id'),
 

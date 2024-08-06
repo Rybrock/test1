@@ -18,7 +18,7 @@ return new class extends Migration
                   ->onDelete('cascade');
             $table->string('game_name');
             $table->string('genre');
-            $table->string('platforms');
+            $table->json('platforms');
             $table->string('game_origin');
             $table->integer('meta_critic_score');
             $table->boolean('out_now');

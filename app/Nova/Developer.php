@@ -3,11 +3,12 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Email;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Email;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Developer extends Resource
@@ -82,6 +83,8 @@ class Developer extends Resource
             Date::make('Last Published Game', 'last_published_game')
                 ->sortable()
                 ->rules('nullable', 'date'),
+
+            BelongsToMany::make('Games'),
         ];
     }
 

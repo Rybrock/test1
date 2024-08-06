@@ -28,11 +28,12 @@ class Game extends Model
     protected $casts = [
         'release_date' => 'date',
         'out_now' => 'boolean',
+        'platforms' => 'array',
     ];
 
     public function developer()
     {
-        return $this->belongsTo(Developer::class);
+        return $this->belongsToMany(Developer::class);
     }
     public function subscribers()
     {
