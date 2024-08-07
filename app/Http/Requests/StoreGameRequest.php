@@ -34,7 +34,7 @@ class StoreGameRequest extends FormRequest
         'collectors_edition' => 'required|boolean',
         'online_stores' => 'required|string|max:255',
         'audience' => 'required|string|max:255',
-        'developer_id' => 'required|exists:developers,id'
+        'developer_id' => 'required|exists:developers,id',
         ];
     }
     protected function failedValidation(Validator $validator)

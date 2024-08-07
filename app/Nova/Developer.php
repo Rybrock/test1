@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Email;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -84,7 +85,7 @@ class Developer extends Resource
                 ->sortable()
                 ->rules('nullable', 'date'),
 
-            BelongsToMany::make('Games'),
+            HasMany::make('Games'),
         ];
     }
 

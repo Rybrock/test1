@@ -7,7 +7,7 @@ use App\Models\Game;
 
 class GameController extends Controller
 {
-    // list of games.
+    // List of games.
     public function index()
     {
         $games = Game::with('developer', 'subscribers')->get();

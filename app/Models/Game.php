@@ -33,7 +33,7 @@ class Game extends Model
 
     public function developer()
     {
-        return $this->belongsToMany(Developer::class);
+        return $this->belongsTo(Developer::class);
     }
     public function subscribers()
     {

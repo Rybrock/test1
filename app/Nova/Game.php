@@ -94,9 +94,9 @@ class Game extends Resource
                 ->rules('required', 'date'),
 
             // Relationship Fields
-            BelongsToMany::make('Developer', 'developer', \App\Nova\Developer::class)
+            BelongsTo::make('Developer', 'developer', \App\Nova\Developer::class)
                 ->sortable()
-                ->rules('required', 'exists:developers,id'),
+                ->rules('required'),
 
             BelongsToMany::make('Subscribers', 'subscribers', \App\Nova\Subscriber::class),
         ];
