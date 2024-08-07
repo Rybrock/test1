@@ -35,7 +35,6 @@ class Developer extends Resource
     public static $search = [
         'id',
         'developer_name',
-        'email',
     ];
 
     /**
@@ -53,39 +52,11 @@ class Developer extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Email::make('Email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254'),
-
-            Text::make('Developer Address', 'developer_address')
-                ->sortable()
-                ->rules('nullable', 'max:255'),
-
-            Text::make('Developer Location', 'developer_location')
-                ->sortable()
-                ->rules('nullable', 'max:255'),
-
-            Text::make('Lead Developer', 'lead_developer')
-                ->sortable()
-                ->rules('nullable', 'max:255'),
-
             Text::make('Genre')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Boolean::make('Is Active', 'is_active')
-                ->sortable()
-                ->rules('required'),
-
-            Date::make('First Published Game', 'first_published_game')
-                ->sortable()
-                ->rules('nullable', 'date'),
-
-            Date::make('Last Published Game', 'last_published_game')
-                ->sortable()
-                ->rules('nullable', 'date'),
-
-            HasMany::make('Games'),
+            HasMany::make('Games', 'games', Game::class),
         ];
     }
 

@@ -2,42 +2,35 @@
 
 namespace App\Models;
 
-use App\Models\Developer;
-use App\Models\Subscriber;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model
 {
     use HasFactory;
+
     protected $table = 'games';
 
     protected $fillable = [
-        'game_name',
-        'genre',
-        'platforms',
-        'game_origin',
-        'meta_critic_score',
-        'out_now',
-        'audience',
-        'online_stores',
-        'collectors_edition',
+        'title',
         'release_date',
+        'developer_team',
+        'rating',
+        'times_listed',
+        'number_of_reviews',
+        'genres',
+        'summary',
+        'reviews',
         'developer_id',
     ];
+
     protected $casts = [
-        'release_date' => 'date',
-        'out_now' => 'boolean',
-        'platforms' => 'array',
+        'genres' => 'array',
+        'release_date' => 'date'
     ];
 
     public function developer()
     {
         return $this->belongsTo(Developer::class);
     }
-    public function subscribers()
-    {
-        return $this->belongsToMany(Subscriber::class, 'game_subscriber');
-    }
-
 }

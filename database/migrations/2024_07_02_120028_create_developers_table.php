@@ -14,14 +14,7 @@ return new class extends Migration
         Schema::create('developers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('developer_name');
-            $table->string('email')->unique();
-            $table->string('developer_address');
-            $table->string('developer_location');
-            $table->string('lead_developer');
-            $table->string('genre');
-            $table->boolean('is_active');
-            $table->date('first_published_game');
-            $table->date('last_published_game');
+            $table->string('genre')->nullable();
             $table->timestamps();
         });
     }

@@ -6,36 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(App\Models\Developer::class)
-                  ->constrained()
-                  ->onDelete('cascade');
-            $table->string('game_name');
-            $table->string('genre');
-            $table->json('platforms');
-            $table->string('game_origin');
-            $table->integer('meta_critic_score');
-            $table->boolean('out_now');
-            $table->date('release_date');
-            $table->boolean('collectors_edition');
-            $table->string('online_stores');
-            $table->string('audience');
+            $table->string('title');
+            $table->foreignId('developer_id')->nullable()->constrained()->onDelete('cascade');
+            $table->date('release_date')->nullable();
+            $table->string('developer_team')->nullable();
+            $table->decimal('rating', 5, 2)->nullable();
+            $table->unsignedInteger('times_listed')->nullable();
+            $table->integer('number_of_reviews')->nullable();
+            $table->json('genres')->nullable();
+            $table->text('summary')->nullable();
+            $table->text('reviews')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('games');
     }
 };
-

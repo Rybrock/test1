@@ -13,6 +13,7 @@
         "laravel/nova": "^4.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "league/csv": "^9.16",
         "optimistdigital/nova-multiselect-field": "^4.5",
         "predis/predis": "^2.0",
         "symfony/http-client": "^6.4",

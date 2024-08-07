@@ -24,17 +24,11 @@ class StoreGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'game_name' => 'required|string|max:255',
-        'genre' => 'required|string|max:255',
-        'platforms' => 'required|string|max:255',
-        'game_origin' => 'required|string|max:255',
-        'meta_critic_score' => 'required|integer|min:1|max:30',
-        'out_now' => 'required|boolean',
-        'release_date' => 'required|date',
-        'collectors_edition' => 'required|boolean',
-        'online_stores' => 'required|string|max:255',
-        'audience' => 'required|string|max:255',
-        'developer_id' => 'required|exists:developers,id',
+        'name' => 'required|string|max:255',
+        'platform' => 'required|json',
+        'review_score' => 'required|integer',
+        'review' => 'required|string|max:255',
+        'developer_id' => 'nullable|exists:developers,id',
         ];
     }
     protected function failedValidation(Validator $validator)

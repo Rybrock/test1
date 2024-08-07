@@ -25,14 +25,7 @@ class StoreDeveloperRequest extends FormRequest
     {
         return [
         'developer_name' => 'required|string|max:255',
-        'email' => 'required|string|max:255',
-        'developer_address' => 'required|string|max:255',
-        'developer_location' => 'required|string|max:255',
-        'lead_developer' => 'required|string|max:255',
         'genre' => 'required|string|max:255',
-        'is_active' => 'required|boolean',
-        'first_published_game' => 'required|date',
-        'last_published_game' => 'required|date',
         ];
     }
 
