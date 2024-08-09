@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\SubscriberEmail;
 
 class SendSubscriberEmails implements ShouldQueue
 {
@@ -20,6 +21,8 @@ class SendSubscriberEmails implements ShouldQueue
     /**
      * Create a new job instance.
      *
+     * @param \App\Models\Subscriber $subscriber
+     * @param \App\Models\Game $game
      * @return void
      */
     public function __construct($subscriber, $game)
@@ -35,7 +38,7 @@ class SendSubscriberEmails implements ShouldQueue
      */
     public function handle()
     {
-        // Send email logic
-        Mail::to($this->subscriber->email)->send(new \App\Mail\SubscriberEmail($this->subscriber));
+        // Send email with the subscriber's name and the game's title
+        Mail::to($this->subscriber->email)->send(new SubscriberEmail($this->subscriber->name, $this->game->title));
     }
 }

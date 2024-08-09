@@ -16,6 +16,7 @@ class ImportGames extends Command
 
     public function handle()
     {
+        // path tp storage folder in repo
         $filePath = storage_path('game_imports/games.csv');
         $this->info("Checking file path: $filePath");
 
@@ -43,7 +44,7 @@ class ImportGames extends Command
             $this->error("Developer name is missing for game '{$record['Title']}'.");
             return;
         }
-
+        // create a developer
         $developer = Developer::firstOrCreate(
             [
                 'developer_name' => $developerName,
@@ -51,14 +52,14 @@ class ImportGames extends Command
             ],
         );
 
-
+        // map the data
         $gameData = [
             'title' => $record['Title'] ?? null,
             'release_date' => $this->formatDate($record['Release Date'] ?? null),
             'developer_team' => $developerName,
-            'rating' => $this->sanitizeDecimal($record['Rating'] ?? null),
-            'times_listed' => $this->sanitizeInteger($record['Times Listed'] ?? null),
-            'number_of_reviews' => $this->sanitizeInteger($record['Number of Reviews'] ?? null),
+            'rating' => $this->formatDecimal($record['Rating'] ?? null),
+            'times_listed' => $this->formatInteger($record['Times Listed'] ?? null),
+            'number_of_reviews' => $this->formatInteger($record['Number of Reviews'] ?? null),
             'genres' => $this->formatTextField($record['Genres'] ?? ''),
             'summary' => $record['Summary'] ?? null,
             'reviews' => $this->formatTextField($record['Reviews'] ?? ''),
@@ -67,7 +68,7 @@ class ImportGames extends Command
 
         Game::create($gameData);
     }
-
+    // format date
     private function formatDate($date)
     {
         if (!$date) {
@@ -82,16 +83,17 @@ class ImportGames extends Command
         }
     }
 
-    private function sanitizeDecimal($value)
+    // format rating
+    private function formatDecimal($value)
     {
         return is_numeric($value) ? (float) $value : null;
     }
-
-    private function sanitizeInteger($value)
+    // format times_listed and number_of_reviews
+    private function formatInteger($value)
     {
         return is_numeric($value) ? (int) $value : null;
     }
-
+    // format reviews
     private function formatTextField($field)
     {
         return $field ? implode(', ', array_map('trim', explode(',', $field))) : null;
