@@ -41,8 +41,6 @@ class SendEmails extends Command
             return;
         }
         foreach ($games as $game) {
-            \Log::info('Processing game: ' . $game->name);
-
             // Find all subscribers associated with the game
             $subscribers = $game->subscribers;
 

@@ -18,12 +18,7 @@ class DeveloperFactory extends Factory
     {
         return [
             'developer_name' => $this->faker->company(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'developer_address' => $this->faker->address(),
-            'developer_location' => $this->faker->country(),
-            'developer_meta_score' => $this->faker->numberBetween(1, 30),
-            'is_active' => $this->faker->boolean(),
-            'first_published_game' => $this->faker->date(),
+            'genre' => $this->faker->word(),
         ];
     }
 }

@@ -57,6 +57,8 @@ class Developer extends Resource
                 ->rules('required', 'max:255'),
 
             HasMany::make('Games', 'games', Game::class),
+
+            BelongsToMany::make('Game Events', 'gameEvents', GameEvent::class),
         ];
     }
 

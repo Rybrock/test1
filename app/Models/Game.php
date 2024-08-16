@@ -38,4 +38,9 @@ class Game extends Model
     {
         return $this->belongsToMany(Subscriber::class, 'game_subscriber', 'game_id', 'subscriber_id');
     }
+
+    public function gameEvents()
+    {
+        return $this->belongsToMany(GameEvents::class, 'game_event_game', 'game_id', 'game_event_id');
+    }
 }

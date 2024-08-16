@@ -3,10 +3,12 @@
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\DeveloperGameController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\GameEventsController;
 use App\Http\Controllers\SubscriberController;
 use App\Mail\SubscriberEmail;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -49,6 +51,10 @@ Route::put('subscribers/{id}', [SubscriberController::class, 'update']);
 Route::delete('subscribers/{id}', [SubscriberController::class, 'destroy']);
 Route::post('subscribers/{id}/games', [SubscriberController::class, 'addGames']);
 Route::delete('subscribers/{id}/games/{game_id}', [SubscriberController::class, 'removeGame']);
+
+// game events
+Route::post('/game-events', [GameEventsController::class, 'store']);
+Route::get('game-events/{id}', [GameEventsController::class, 'show']);
 
 // test route for sending an email
 Route::get('/test-email', function () {

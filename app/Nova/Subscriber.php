@@ -63,6 +63,8 @@ class Subscriber extends Resource
 
             // Relationship field
             BelongsToMany::make('Games', 'games', \App\Nova\Game::class),
+
+            BelongsToMany::make('Game Events', 'gameEvents', GameEvent::class),
         ];
     }
 

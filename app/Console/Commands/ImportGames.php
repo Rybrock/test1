@@ -38,6 +38,7 @@ class ImportGames extends Command
 
     private function createGameAndDeveloperFromRecord(array $record)
     {
+        // check to see if the record exists
         $developerName = $record['Team'] ?? null;
         $developerGenre = $record['Genres'] ?? null;
         if (!$developerName) {
@@ -52,7 +53,7 @@ class ImportGames extends Command
             ],
         );
 
-        // map the data
+        // map the data to create game
         $gameData = [
             'title' => $record['Title'] ?? null,
             'release_date' => $this->formatDate($record['Release Date'] ?? null),
@@ -68,31 +69,45 @@ class ImportGames extends Command
 
         Game::create($gameData);
     }
+
     // format date
     private function formatDate($date)
-    {
-        if (!$date) {
-            return null;
-        }
-
-        try {
-            return Carbon::createFromFormat('M d, Y', $date)->format('Y-m-d');
-        } catch (\Exception $e) {
-            $this->error("Invalid date format: $date");
-            return null;
-        }
+{
+    if (!$date) {
+        return null;
     }
+
+    // Use a regular expression to validate if the date is in the correct format
+    $pattern = '/^[A-Za-z]{3} \d{1,2}, \d{4}$/';
+    if (!preg_match($pattern, $date)) {
+        $this->error("Invalid date format: $date");
+        return null;
+    }
+
+    // If the format is correct, proceed with parsing the date
+    $formattedDate = Carbon::createFromFormat('M d, Y', $date);
+
+    // If the date couldn't be parsed, return null
+    if ($formattedDate === false) {
+        $this->error("Failed to parse the date: $date");
+        return null;
+    }
+
+    return $formattedDate->format('Y-m-d');
+}
 
     // format rating
     private function formatDecimal($value)
     {
         return is_numeric($value) ? (float) $value : null;
     }
+
     // format times_listed and number_of_reviews
     private function formatInteger($value)
     {
         return is_numeric($value) ? (int) $value : null;
     }
+
     // format reviews
     private function formatTextField($field)
     {
