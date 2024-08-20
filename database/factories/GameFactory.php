@@ -6,7 +6,7 @@ use App\Models\Developer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Games>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Game>
  */
 class GameFactory extends Factory
 {
@@ -18,15 +18,16 @@ class GameFactory extends Factory
     public function definition(): array
     {
         return [
-            'game_name' => $this->faker->company(),
+            'title' => $this->faker->company(),
+            'release_date' => $this->faker->date(),
+            'developer_team' => $this->faker->company(),
+            'rating' => $this->faker->randomFloat(1, 0, 5),
+            'times_listed' => $this->faker->numberBetween(1, 1000),
+            'number_of_reviews' => $this->faker->numberBetween(0, 500),
+            'genres' => $this->faker->randomElements(['Action', 'Adventure', 'RPG', 'Strategy', 'Simulation'], $count = 2),
+            'summary' => $this->faker->paragraph(),
+            'reviews' => $this->faker->paragraphs(3, true),
             'developer_id' => Developer::all()->random()->id,
-            'email' => $this->faker->unique()->safeEmail(),
-            'game_address' => $this->faker->address(),
-            'game_location' => $this->faker->country(),
-            'game_meta_score' => $this->faker->numberBetween(1, 30),
-            'is_active' => $this->faker->boolean(),
-            'first_published' => $this->faker->date(),
-            'rating' => $this->faker->randomFloat(1, 0, 5)
         ];
     }
 }
