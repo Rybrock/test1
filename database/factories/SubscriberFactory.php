@@ -22,7 +22,6 @@ class SubscriberFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'address' => $this->faker->address(),
             'location' => $this->faker->city(),
-            // 'game_id' => Game::all()->random()->id,
         ];
     }
 }

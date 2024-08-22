@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('rating', 5, 2)->nullable();
             $table->unsignedInteger('times_listed')->nullable();
             $table->integer('number_of_reviews')->nullable();
-            $table->json('genres')->nullable();
+            $table->text('genres')->nullable();
             $table->text('summary')->nullable();
             $table->text('reviews')->nullable();
             $table->timestamps();

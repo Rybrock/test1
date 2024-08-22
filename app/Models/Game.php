@@ -25,7 +25,6 @@ class Game extends Model
     ];
 
     protected $casts = [
-        'genres' => 'array',
         'release_date' => 'date'
     ];
 
